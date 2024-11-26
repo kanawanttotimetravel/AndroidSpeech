@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     //text to speech
     TextToSpeech textToSpeech;
-    Button speakButton;
+
+    ImageButton sendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         listenButton = findViewById(R.id.listenButtonImg);
         textPlaceholder = findViewById(R.id.textPlaceholder);
-        speakButton = findViewById(R.id.speakButton);
+        sendButton = findViewById(R.id.sendButton);
 
         listenButton.setOnClickListener(v -> speechToTextFunction());
-
-        speakButton.setOnClickListener(v -> {
-            if ( textPlaceholder.getText().toString().isEmpty() ){
-                String greeting = DEFAULT_GREETING;
-                textPlaceholder.setText(greeting);
-                textToSpeechFunction(greeting);
-            } else {
-                textToSpeechFunction( textPlaceholder.getText().toString() );
-            }
-        });
+        sendButton.setOnClickListener(v -> sendMessage());
     }
 
     public void speechToTextFunction(){
@@ -101,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
                 textPlaceholder.setText(text);
 
             }
+        }
+    }
+
+    private void sendMessage() {
+        String message = textPlaceholder.getText().toString().trim();
+        if (!message.isEmpty()) {
+            // Handle sending the message here
         }
     }
 

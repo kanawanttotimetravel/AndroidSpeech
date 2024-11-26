@@ -1,39 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/white">
 
+    <!-- Logo at the top -->
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/banner"
+        android:contentDescription="DENSO_banner"/>
+
+    <!-- Bottom input section -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/listenButtonImg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mic"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <EditText
             android:id="@+id/textPlaceholder"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            />
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="Nhập tại đây..."
+            android:padding="8dp"/>
 
-        <Button
-            android:id="@+id/speakButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nói" />
+        <ImageButton
+            android:id="@+id/listenButtonImg"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_microphone"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:id="@+id/sendButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_send"
+            android:padding="8dp"/>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
