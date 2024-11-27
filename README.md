@@ -1,7 +1,7 @@
 # AndroidSpeech
 The main file is `app/src/main/java/com/example/myapplication/MainActivity.java`
 
-## wtf happened here
+## Functions
 The 2 main functions are `speechToTextFunction()` and `textToSpeechFunction()`.
 
 - `speechToTextFunction()` invoke a `startActivityForResult()`, whose results can only be retrieved through invoking `onActivityResult()` due to Android magic (or I'm just dumb).

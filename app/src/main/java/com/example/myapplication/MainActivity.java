@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -20,7 +22,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
-    private final String DEFAULT_GREETING = "Xin chào";
+    private final String DEFAULT_GREETING = "Chào bạn! Tôi là trợ lý chuyên về Công ty Denso. Tôi có thể giúp bạn với bất kỳ thông tin nào liên quan đến hoạt động toàn cầu, máy móc, quy trình sản xuất và sản phẩm của Denso. Bạn cần hỗ trợ gì thế?";
     ImageButton listenButton;
     EditText textPlaceholder;
     private final int REQ_CODE_SPEECH_INPUT = 100;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     TextToSpeech textToSpeech;
 
     ImageButton sendButton;
+
+    private RecyclerView messagesRecyclerView;
+    private MessageAdapter messageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
         listenButton.setOnClickListener(v -> speechToTextFunction());
         sendButton.setOnClickListener(v -> sendMessage());
+
+        messagesRecyclerView = findViewById(R.id.messagesRecyclerView);
+        messageAdapter = new MessageAdapter();
+        messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messagesRecyclerView.setAdapter(messageAdapter);
+
+        // Add initial bot message
+        messageAdapter.addMessage(new Message(DEFAULT_GREETING, false));
+        textToSpeechFunction(DEFAULT_GREETING);
     }
 
     public void speechToTextFunction(){
@@ -69,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             public void onInit(int status) {
                 if ( status != TextToSpeech.ERROR ){
                     textToSpeech.setLanguage( new Locale("vi_VN") );
-                    textToSpeech.setSpeechRate((float) 1.5);
+                    textToSpeech.setSpeechRate((float) 1.25);
                     textToSpeech.speak(text , TextToSpeech.QUEUE_FLUSH , null, TAG);
 
                 }
@@ -99,7 +113,12 @@ public class MainActivity extends AppCompatActivity {
     private void sendMessage() {
         String message = textPlaceholder.getText().toString().trim();
         if (!message.isEmpty()) {
-            // Handle sending the message here
+            messageAdapter.addMessage(new Message(message, true));
+            // textToSpeechFunction(message);
+            textPlaceholder.setText("");
+            
+            // Scroll to bottom
+            messagesRecyclerView.smoothScrollToPosition(messageAdapter.getItemCount() - 1);
         }
     }
 

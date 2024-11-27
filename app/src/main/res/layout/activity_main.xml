@@ -4,32 +4,37 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Logo at the top -->
-    <ImageView
-        android:id="@+id/logoImage"
-        android:layout_width="200dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/banner"
-        android:contentDescription="DENSO_banner"/>
+        android:layout_above="@id/inputLayout"
+        android:padding="8dp"
+        android:clipToPadding="false"/>
 
-    <!-- Bottom input section -->
     <LinearLayout
+        android:id="@+id/inputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_input_section">
 
         <EditText
             android:id="@+id/textPlaceholder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="Nhập tại đây..."
-            android:padding="8dp"/>
+            android:background="@null"
+            android:hint="Type a message"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:maxLines="4"
+            android:inputType="textMultiLine"/>
 
         <ImageButton
             android:id="@+id/listenButtonImg"
